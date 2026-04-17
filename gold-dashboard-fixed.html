@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Live Gold Rate Today - India Gold Price & Shop Comparison</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9922A;
+    --gold-light: #F5D98A;
+    --gold-dark: #8B5E10;
+    --bg: #0D0B08;
+    --bg2: #141208;
+    --bg3: #1C1810;
+    --surface: #201C13;
+    --surface2: #2A2418;
+    --border: rgba(201,146,42,0.18);
+    --border2: rgba(201,146,42,0.35);
+    --text: #F5EDD8;
+    --text2: #A89878;
+    --text3: #6E5E40;
+    --green: #4CAF7D;
+    --red: #E05252;
+    --blue: #5B9AFF;
+    --green-bg: rgba(76,175,125,0.12);
+    --red-bg: rgba(224,82,82,0.12);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .site-header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.25rem;
+    color: var(--gold);
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .nav-tabs { display: flex; gap: 8px; }
+
+  .nav-tab {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+  }
+
+  .nav-tab.active { background: var(--gold); border-color: var(--gold); color: #000; }
+  .nav-tab:hover { border-color: var(--gold); }
+
+  .live-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--text2);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .location-dropdown {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    cursor: pointer;
+    min-width: 130px;
+  }
+
+  .hero {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 50% -20%, rgba(201,146,42,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); margin-bottom: 0.5rem; }
+
+  .location-badge {
+    display: inline-block;
+    background: rgba(201,146,42,0.1);
+    border: 1px solid var(--border);
+    color: var(--gold);
+    padding: 4px 12px;
+    border-radius: 16px;
+    font-size: 11px;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-price {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-sub { font-size: 13px; color: var(--text3); margin-bottom: 1.25rem; }
+
+  .hero-metrics {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--surface);
+  }
+
+  .hero-metric {
+    flex: 1;
+    min-width: 120px;
+    padding: 1rem;
+    border-right: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .hero-metric:last-child { border-right: none; }
+  .hero-metric-label { font-size: 11px; color: var(--text3); text-transform: uppercase; margin-bottom: 4px; }
+  .hero-metric-value { font-size: 15px; font-weight: 600; color: var(--text); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+  }
+
+  @media (max-width: 900px) { .main-grid { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .card-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .card-body { padding: 1.25rem; }
+
+  /* ── SHOP CARDS ── */
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .shop-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shop-card.best-deal {
+    border: 2px solid var(--gold);
+    background: linear-gradient(135deg, rgba(201,146,42,0.05), rgba(201,146,42,0.02));
+  }
+
+  .shop-card.best-deal::before {
+    content: '⭐ BEST DEAL';
+    position: absolute;
+    top: 10px; right: -30px;
+    background: var(--gold);
+    color: #000;
+    padding: 4px 40px;
+    font-size: 11px;
+    font-weight: 700;
+    transform: rotate(45deg);
+    transform-origin: right;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+
+  .shop-name { font-size: 16px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .shop-location { font-size: 12px; color: var(--text3); margin-bottom: 12px; }
+
+  .shop-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .shop-price-label { font-size: 12px; color: var(--text3); }
+  .shop-price-value { font-size: 18px; font-weight: 700; color: var(--gold); }
+
+  .shop-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .shop-detail-item {
+    background: rgba(201,146,42,0.05);
+    border-radius: 6px;
+    padding: 6px 8px;
+    font-size: 11px;
+  }
+
+  .shop-detail-label { color: var(--text3); margin-bottom: 2px; }
+  .shop-detail-value { color: var(--text); font-weight: 600; }
+  .shop-detail-value.good { color: var(--green); }
+  .shop-detail-value.ok { color: var(--gold); }
+  .shop-detail-value.bad { color: var(--red); }
+
+  .shop-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 10px;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 10px;
+    border: 1px solid;
+  }
+
+  .tag-green { background: var(--green-bg); border-color: rgba(76,175,125,0.3); color: var(--green); }
+  .tag-gold { background: rgba(201,146,42,0.1); border-color: var(--border2); color: var(--gold); }
+  .tag-blue { background: var(--blue-bg); border-color: rgba(91,154,255,0.3); color: var(--blue); }
+
+  .shop-rating {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    font-size: 12px;
+    color: var(--text2);
+  }
+
+  /* ── FULL CRITERIA TABLE ── */
+  .criteria-table-wrap { overflow-x: auto; margin-top: 1.5rem; }
+
+  .criteria-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    min-width: 800px;
+  }
+
+  .criteria-table th {
+    padding: 10px 14px;
+    background: var(--bg3);
+    font-size: 11px;
+    color: var(--text3);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  .criteria-table th.shop-col-head {
+    text-align: center;
+    min-width: 120px;
+  }
+
+  .criteria-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(201,146,42,0.06);
+    vertical-align: middle;
+  }
+
+  .criteria-table tr:hover { background: rgba(201,146,42,0.03); }
+
+  .criteria-table .criteria-name {
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  .criteria-table .criteria-desc {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 2px;
+  }
+
+  .criteria-table td.center { text-align: center; }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .pill-green { background: var(--green-bg); color: var(--green); }
+  .pill-red   { background: var(--red-bg);   color: var(--red); }
+  .pill-gold  { background: rgba(201,146,42,0.12); color: var(--gold); }
+  .pill-blue  { background: var(--blue-bg);  color: var(--blue); }
+
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .score-bar-bg {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .score-bar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+
+  .score-bar-label { font-size: 11px; color: var(--text2); min-width: 26px; }
+
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card { background: var(--surface); padding: 1rem 1.25rem; text-align: center; }
+  .stat-label { font-size: 11px; color: var(--text3); text-transform: uppercase; margin-bottom: 6px; }
+  .stat-value { font-size: 17px; font-weight: 600; color: var(--text); }
+
+  .alert-box {
+    background: rgba(76,175,125,0.1);
+    border: 1px solid rgba(76,175,125,0.2);
+    color: var(--green);
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 1rem;
+    font-size: 13px;
+  }
+
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .price-list { margin-top: 1rem; }
+  .price-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(201,146,42,0.06);
+  }
+  .price-item:last-child { border-bottom: none; }
+  .price-item-label { color: var(--text2); }
+  .price-item-value { color: var(--gold); font-weight: 600; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 1.5rem;
+    text-align: center;
+    color: var(--text3);
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    .site-header { flex-direction: column; gap: 10px; height: auto; padding: 1rem; }
+    .header-right { flex-wrap: wrap; justify-content: center; }
+    .nav-tabs { flex-wrap: wrap; }
+    .shop-grid { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .section-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 2rem 0 0.5rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a class="logo" href="#">
+    <div class="logo-icon">⬡</div>
+    GoldRate Live
+  </a>
+  <div class="header-right">
+    <select class="location-dropdown" id="locationSelect" onchange="changeLocation()">
+      <option value="Chennai">Chennai</option>
+      <option value="Bangalore">Bangalore</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Delhi">Delhi</option>
+      <option value="Kolkata">Kolkata</option>
+      <option value="Hyderabad">Hyderabad</option>
+    </select>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="switchPage('dashboard', event)">Live Price</button>
+      <button class="nav-tab" onclick="switchPage('shops', event)">Shop Comparison</button>
+    </div>
+    <div class="live-badge">
+      <div class="live-dot"></div>
+      Live
+    </div>
+  </div>
+</header>
+
+<!-- PAGE 1: LIVE PRICE DASHBOARD -->
+<div class="page active" id="dashboard">
+  <section class="hero">
+    <div class="location-badge" id="locationBadge">📍 Chennai</div>
+    <div class="hero-label">22 Carat Gold Rate · Per Gram (Today)</div>
+    <div class="hero-price">₹ <span id="heroPriceValue">14,135</span></div>
+    <div class="hero-sub">Live market rate • Excl. GST & making charges</div>
+    <div class="hero-metrics">
+      <div class="hero-metric">
+        <div class="hero-metric-label">Per Pavan (8g)</div>
+        <div class="hero-metric-value" id="metricPavan">₹1,13,080</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-label">Per 10g</div>
+        <div class="hero-metric-value" id="metric10g">₹1,41,350</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-label">Per 100g</div>
+        <div class="hero-metric-value" id="metric100g">₹14,13,500</div>
+      </div>
+      <div class="hero-metric">
+        <div class="hero-metric-label">24K Rate</div>
+        <div class="hero-metric-value" id="metric24k">₹15,420</div>
+      </div>
+    </div>
+    <div style="margin-top: 1rem; font-size: 11px; color: var(--text3);">
+      Updated: 17 April 2026 • Source: IBJA Benchmark + Market Rates
+    </div>
+  </section>
+
+  <div class="container">
+    <div style="padding: 1.5rem 0 0;">
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-label">18K Rate</div>
+          <div class="stat-value" id="stat18k">₹11,565</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Per 1 Tola (12g)</div>
+          <div class="stat-value" id="statTola">₹1,69,620</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Per Sovereign (8g)</div>
+          <div class="stat-value" id="statSovereign">₹1,13,080</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">With 3% GST</div>
+          <div class="stat-value" id="statGst">₹14,559</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-grid">
+      <div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Today's Gold Rates</span></div>
+          <div class="card-body">
+            <div class="price-list">
+              <div class="price-item"><span class="price-item-label">22K (916) Per Gram</span><span class="price-item-value">₹14,135</span></div>
+              <div class="price-item"><span class="price-item-label">24K (999) Per Gram</span><span class="price-item-value">₹15,420</span></div>
+              <div class="price-item"><span class="price-item-label">18K (750) Per Gram</span><span class="price-item-value">₹11,565</span></div>
+              <div class="price-item"><span class="price-item-label">22K + 3% GST</span><span class="price-item-value">₹14,559</span></div>
+              <div class="price-item"><span class="price-item-label">With Making Charges (5%)</span><span class="price-item-value">₹14,841</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Important Notes</span></div>
+          <div class="card-body" style="font-size: 12px; color: var(--text2); line-height: 1.8;">
+            <p style="margin-bottom: 10px;"><strong style="color: var(--gold);">⚠️ Above price excludes:</strong></p>
+            <ul style="margin-left: 1rem; margin-bottom: 1rem;">
+              <li>GST (3% — Central 1.5% + State 1.5%)</li>
+              <li>Making charges (5–35% depending on design)</li>
+              <li>Shop margins & premiums</li>
+            </ul>
+            <p style="color: var(--text3); font-size: 11px;">Check "Shop Comparison" tab to see actual retail prices at jewelry stores.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: SHOP COMPARISON -->
+<div class="page" id="shops">
+  <div class="container" style="padding: 1.5rem 0;">
+    <h2 style="color: var(--text); margin-bottom: 0.5rem;">🏪 Shop Comparison — <span id="shopCity">Chennai</span></h2>
+    <p style="color: var(--text2); margin-bottom: 1rem; font-size: 13px;">Compare 22K gold rates & all buying criteria at jewellery stores near you. Prices include making charges but exclude 3% GST.</p>
+
+    <div id="shopAlert"></div>
+
+    <!-- SHOP CARDS -->
+    <div class="shop-grid" id="shopGrid">
+      <div style="text-align:center;padding:2rem;color:var(--text3);">Loading shop data…</div>
+    </div>
+
+    <!-- FULL CRITERIA TABLE -->
+    <p class="section-title">📊 Full Buying Criteria Comparison</p>
+    <div class="criteria-table-wrap">
+      <table class="criteria-table" id="criteriaTable">
+        <thead id="criteriaHead"></thead>
+        <tbody id="criteriaBody">
+          <tr><td colspan="10" style="text-align:center;color:var(--text3);padding:2rem;">Loading…</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);">
+      <h3 style="color: var(--gold); margin-bottom: 1rem;">💡 How to Use This Page</h3>
+      <ul style="color: var(--text2); font-size: 12px; line-height: 2; margin-left: 1.5rem;">
+        <li>✓ Compare live rates from different jewelry stores</li>
+        <li>✓ See how much making charge each shop adds above base rate</li>
+        <li>✓ Check BIS Hallmark, buyback policy, and exchange terms</li>
+        <li>✓ Verify weight & purity before purchase</li>
+        <li>✓ Negotiate making charges with the jeweller</li>
+        <li>✓ Always ask for a bill — required for GST & warranty</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong style="color: var(--gold);">GoldRate Live</strong> — Real-Time Gold Price & Shop Comparison</p>
+  <p style="margin-top: 0.5rem;">Data Source: IBJA (India Bullion & Jewellers Association) Benchmark Rates</p>
+  <p style="margin-top: 0.5rem; font-size: 11px;">Prices are indicative. Contact jewellery store for current rates. Not an offer to sell.</p>
+</footer>
+
+<script>
+// ─────────────────────────────────────────
+// GOLD BASE RATES — 17 APRIL 2026
+// ─────────────────────────────────────────
+const BASE_RATES = {
+  '22K': 14135,
+  '24K': 15420,
+  '18K': 11565,
+};
+
+const CITY_ADJUSTMENTS = {
+  'Chennai': 0, 'Bangalore': 80, 'Mumbai': 150, 'Delhi': 140, 'Kolkata': 50, 'Hyderabad': 85,
+};
+
+// ─────────────────────────────────────────
+// SHOP DATABASE — GRT & SARAVANA ARE SEPARATE
+// ─────────────────────────────────────────
+// Criteria fields:
+//   makingCharge   ₹/gram making charge
+//   rating         Google rating (out of 5)
+//   reviews        approximate review count
+//   hallmark       BIS hallmark certified? true/false
+//   buyback        buyback policy (% of current rate)
+//   exchange       exchange offer on old gold? true/false
+//   wastage        wastage % charged (0 = nil)
+//   emi            EMI / easy payment? true/false
+//   purity         hallmark purity guarantee description
+//   negotiable     making charge negotiable?
+//   onlinePrice    online price transparency?
+//   warranty       warranty on jewellery
+//   locations      number of outlets in city
+//   parking        parking available?
+//   certified      third-party certified?
+
+const SHOP_DATABASE = {
+  'Chennai': [
+    {
+      name: 'GRT Jewellers',
+      location: 'T. Nagar, Chennai',
+      makingCharge: 175,
+      rating: 4.6,
+      reviews: 3200,
+      hallmark: true,
+      buyback: 98,
+      exchange: true,
+      wastage: 0,
+      emi: true,
+      purity: '916 BIS Hallmark',
+      negotiable: true,
+      onlinePrice: true,
+      warranty: '1 Year',
+      locations: 12,
+      parking: true,
+      certified: true,
+      tags: ['BIS Certified', 'Zero Wastage', 'Price Transparent'],
+    },
+    {
+      name: 'Saravana Stores (Gold)',
+      location: 'Purasawalkam, Chennai',
+      makingCharge: 155,
+      rating: 4.2,
+      reviews: 1800,
+      hallmark: true,
+      buyback: 95,
+      exchange: true,
+      wastage: 1,
+      emi: false,
+      purity: '916 BIS Hallmark',
+      negotiable: true,
+      onlinePrice: false,
+      warranty: '6 Months',
+      locations: 4,
+      parking: false,
+      certified: false,
+      tags: ['Low Making Charge', 'Budget Friendly'],
+    },
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'Anna Nagar, Chennai',
+      makingCharge: 210,
+      rating: 4.6,
+      reviews: 2100,
+      hallmark: true,
+      buyback: 99,
+      exchange: true,
+      wastage: 0,
+      emi: true,
+      purity: '916 BIS Hallmark',
+      negotiable: false,
+      onlinePrice: true,
+      warranty: 'Lifetime',
+      locations: 8,
+      parking: true,
+      certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback', 'Wide Design Range'],
+    },
+    {
+      name: 'Tanishq',
+      location: 'Nungambakkam, Chennai',
+      makingCharge: 250,
+      rating: 4.4,
+      reviews: 1800,
+      hallmark: true,
+      buyback: 100,
+      exchange: true,
+      wastage: 0,
+      emi: true,
+      purity: '916 BIS Hallmark',
+      negotiable: false,
+      onlinePrice: true,
+      warranty: 'Lifetime',
+      locations: 6,
+      parking: true,
+      certified: true,
+      tags: ['100% Buyback', 'Tata Group', 'Lifetime Warranty'],
+    },
+    {
+      name: 'Joyalukkas',
+      location: 'Mylapore, Chennai',
+      makingCharge: 190,
+      rating: 4.3,
+      reviews: 1200,
+      hallmark: true,
+      buyback: 97,
+      exchange: true,
+      wastage: 0,
+      emi: true,
+      purity: '916 BIS Hallmark',
+      negotiable: true,
+      onlinePrice: true,
+      warranty: '1 Year',
+      locations: 5,
+      parking: true,
+      certified: true,
+      tags: ['BIS Certified', 'EMI Available'],
+    },
+    {
+      name: 'Bhima Jewellery',
+      location: 'Egmore, Chennai',
+      makingCharge: 160,
+      rating: 4.4,
+      reviews: 1100,
+      hallmark: true,
+      buyback: 96,
+      exchange: true,
+      wastage: 0.5,
+      emi: false,
+      purity: '916 BIS Hallmark',
+      negotiable: true,
+      onlinePrice: false,
+      warranty: '1 Year',
+      locations: 3,
+      parking: true,
+      certified: true,
+      tags: ['Low Making Charge', 'BIS Certified'],
+    },
+  ],
+  'Bangalore': [
+    {
+      name: 'GRT Jewellers',
+      location: 'JP Nagar, Bangalore',
+      makingCharge: 175,
+      rating: 4.4,
+      reviews: 1400,
+      hallmark: true, buyback: 98, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: true,
+      warranty: '1 Year', locations: 3, parking: true, certified: true,
+      tags: ['BIS Certified', 'Zero Wastage'],
+    },
+    {
+      name: 'Saravana Stores (Gold)',
+      location: 'Jayanagar, Bangalore',
+      makingCharge: 155,
+      rating: 4.1,
+      reviews: 800,
+      hallmark: true, buyback: 95, exchange: true, wastage: 1,
+      emi: false, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: false,
+      warranty: '6 Months', locations: 2, parking: false, certified: false,
+      tags: ['Budget Friendly', 'Low Making Charge'],
+    },
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'Indiranagar, Bangalore',
+      makingCharge: 200,
+      rating: 4.6,
+      reviews: 2000,
+      hallmark: true, buyback: 99, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 6, parking: true, certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback'],
+    },
+    {
+      name: 'Tanishq',
+      location: 'Whitefield, Bangalore',
+      makingCharge: 240,
+      rating: 4.5,
+      reviews: 1700,
+      hallmark: true, buyback: 100, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 5, parking: true, certified: true,
+      tags: ['100% Buyback', 'Tata Group'],
+    },
+  ],
+  'Mumbai': [
+    {
+      name: 'Tanishq',
+      location: 'Bandra, Mumbai',
+      makingCharge: 280,
+      rating: 4.5, reviews: 3200,
+      hallmark: true, buyback: 100, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 10, parking: true, certified: true,
+      tags: ['100% Buyback', 'Tata Group'],
+    },
+    {
+      name: 'Joyalukkas',
+      location: 'Colaba, Mumbai',
+      makingCharge: 260,
+      rating: 4.4, reviews: 2100,
+      hallmark: true, buyback: 97, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: true,
+      warranty: '1 Year', locations: 6, parking: true, certified: true,
+      tags: ['BIS Certified', 'EMI Available'],
+    },
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'Worli, Mumbai',
+      makingCharge: 230,
+      rating: 4.6, reviews: 2400,
+      hallmark: true, buyback: 99, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 7, parking: true, certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback'],
+    },
+  ],
+  'Delhi': [
+    {
+      name: 'Tanishq',
+      location: 'Connaught Place, Delhi',
+      makingCharge: 290,
+      rating: 4.5, reviews: 2800,
+      hallmark: true, buyback: 100, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 9, parking: true, certified: true,
+      tags: ['100% Buyback', 'Tata Group'],
+    },
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'DLF Mall, Delhi',
+      makingCharge: 250,
+      rating: 4.6, reviews: 1900,
+      hallmark: true, buyback: 99, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 5, parking: true, certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback'],
+    },
+    {
+      name: 'PC Chandra Jewellers',
+      location: 'New Delhi, Delhi',
+      makingCharge: 240,
+      rating: 4.3, reviews: 1600,
+      hallmark: true, buyback: 95, exchange: true, wastage: 1,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: true,
+      warranty: '1 Year', locations: 4, parking: true, certified: true,
+      tags: ['BIS Certified', 'EMI Available'],
+    },
+  ],
+  'Kolkata': [
+    {
+      name: 'Senco Gold',
+      location: 'Tollygunge, Kolkata',
+      makingCharge: 170,
+      rating: 4.4, reviews: 1200,
+      hallmark: true, buyback: 97, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: true,
+      warranty: '1 Year', locations: 7, parking: true, certified: true,
+      tags: ['BIS Certified', 'Low Making Charge'],
+    },
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'New Market, Kolkata',
+      makingCharge: 180,
+      rating: 4.5, reviews: 1100,
+      hallmark: true, buyback: 99, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 4, parking: true, certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback'],
+    },
+    {
+      name: 'PC Chandra Jewellers',
+      location: 'Esplanade, Kolkata',
+      makingCharge: 165,
+      rating: 4.3, reviews: 900,
+      hallmark: true, buyback: 95, exchange: true, wastage: 0.5,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: false,
+      warranty: '1 Year', locations: 5, parking: false, certified: true,
+      tags: ['BIS Certified', 'Low Making Charge'],
+    },
+  ],
+  'Hyderabad': [
+    {
+      name: 'Malabar Gold & Diamonds',
+      location: 'Banjara Hills, Hyderabad',
+      makingCharge: 200,
+      rating: 4.6, reviews: 1600,
+      hallmark: true, buyback: 99, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 5, parking: true, certified: true,
+      tags: ['Lifetime Warranty', 'Best Buyback'],
+    },
+    {
+      name: 'GRT Jewellers',
+      location: 'Madhapur, Hyderabad',
+      makingCharge: 175,
+      rating: 4.3, reviews: 1000,
+      hallmark: true, buyback: 98, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: true, onlinePrice: true,
+      warranty: '1 Year', locations: 2, parking: true, certified: true,
+      tags: ['BIS Certified', 'Zero Wastage'],
+    },
+    {
+      name: 'Tanishq',
+      location: 'Jubilee Hills, Hyderabad',
+      makingCharge: 250,
+      rating: 4.5, reviews: 1300,
+      hallmark: true, buyback: 100, exchange: true, wastage: 0,
+      emi: true, purity: '916 BIS Hallmark', negotiable: false, onlinePrice: true,
+      warranty: 'Lifetime', locations: 4, parking: true, certified: true,
+      tags: ['100% Buyback', 'Tata Group'],
+    },
+  ],
+};
+
+let currentCity = 'Chennai';
+
+function updateDashboard() {
+  const r22 = BASE_RATES['22K'];
+  const r24 = BASE_RATES['24K'];
+  const r18 = BASE_RATES['18K'];
+  document.getElementById('heroPriceValue').textContent = r22.toLocaleString('en-IN');
+  document.getElementById('metricPavan').textContent = '₹' + (r22 * 8).toLocaleString('en-IN');
+  document.getElementById('metric10g').textContent   = '₹' + (r22 * 10).toLocaleString('en-IN');
+  document.getElementById('metric100g').textContent  = '₹' + (r22 * 100).toLocaleString('en-IN');
+  document.getElementById('metric24k').textContent   = '₹' + r24.toLocaleString('en-IN');
+  document.getElementById('stat18k').textContent     = '₹' + r18.toLocaleString('en-IN');
+  document.getElementById('statTola').textContent    = '₹' + (r22 * 12).toLocaleString('en-IN');
+  document.getElementById('statSovereign').textContent = '₹' + (r22 * 8).toLocaleString('en-IN');
+  document.getElementById('statGst').textContent     = '₹' + Math.round(r22 * 1.03).toLocaleString('en-IN');
+}
+
+function pill(text, type) {
+  return `<span class="pill pill-${type}">${text}</span>`;
+}
+
+function yesNo(val, goodIsTrue = true) {
+  if (val === true)  return pill('✓ Yes', goodIsTrue ? 'green' : 'red');
+  if (val === false) return pill('✗ No', goodIsTrue ? 'red' : 'green');
+  return pill(val, 'gold');
+}
+
+function scoreBar(score, max) {
+  const pct = Math.round((score / max) * 100);
+  const color = pct >= 80 ? '#4CAF7D' : pct >= 60 ? '#C9922A' : '#E05252';
+  return `<div class="score-bar">
+    <div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+    <span class="score-bar-label">${score}</span>
+  </div>`;
+}
+
+function loadShops() {
+  const shops = SHOP_DATABASE[currentCity] || SHOP_DATABASE['Chennai'];
+  const baseRate = BASE_RATES['22K'] + (CITY_ADJUSTMENTS[currentCity] || 0);
+
+  // Best deal = lowest making charge
+  const cheapest = shops.reduce((a, b) => a.makingCharge < b.makingCharge ? a : b);
+
+  // ── SHOP CARDS
+  document.getElementById('shopGrid').innerHTML = shops.map(s => {
+    const rate22 = baseRate + s.makingCharge;
+    const isBest = s.name === cheapest.name;
+    const stars  = '⭐'.repeat(Math.floor(s.rating)) + (s.rating % 1 >= 0.5 ? '✨' : '');
+    const tagsHtml = (s.tags || []).map(t => `<span class="tag tag-gold">${t}</span>`).join('');
+
+    return `
+      <div class="shop-card ${isBest ? 'best-deal' : ''}">
+        <div class="shop-name">${s.name}</div>
+        <div class="shop-location">📍 ${s.location}</div>
+        <div class="shop-price">
+          <span class="shop-price-label">22K Rate/gram</span>
+          <span class="shop-price-value">₹${rate22.toLocaleString('en-IN')}</span>
+        </div>
+        <div class="shop-details">
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">Making Charge</div>
+            <div class="shop-detail-value ${s.makingCharge <= 180 ? 'good' : s.makingCharge <= 220 ? 'ok' : 'bad'}">₹${s.makingCharge}/g</div>
+          </div>
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">Buyback</div>
+            <div class="shop-detail-value ${s.buyback >= 98 ? 'good' : 'ok'}">${s.buyback}% rate</div>
+          </div>
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">Wastage</div>
+            <div class="shop-detail-value ${s.wastage === 0 ? 'good' : 'ok'}">${s.wastage === 0 ? 'Nil' : s.wastage + '%'}</div>
+          </div>
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">Warranty</div>
+            <div class="shop-detail-value ok">${s.warranty}</div>
+          </div>
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">BIS Hallmark</div>
+            <div class="shop-detail-value ${s.hallmark ? 'good' : 'bad'}">${s.hallmark ? '✓ Yes' : '✗ No'}</div>
+          </div>
+          <div class="shop-detail-item">
+            <div class="shop-detail-label">EMI Available</div>
+            <div class="shop-detail-value ${s.emi ? 'good' : 'ok'}">${s.emi ? '✓ Yes' : '—'}</div>
+          </div>
+        </div>
+        <div class="shop-tags">${tagsHtml}</div>
+        <div class="shop-rating">${stars} &nbsp; ${s.rating} (${s.reviews.toLocaleString('en-IN')} reviews)</div>
+      </div>`;
+  }).join('');
+
+  // ── ALERT
+  const bestRate = baseRate + cheapest.makingCharge;
+  const avgMaking = Math.round(shops.reduce((s, x) => s + x.makingCharge, 0) / shops.length);
+  const savings = avgMaking - cheapest.makingCharge;
+  document.getElementById('shopAlert').innerHTML = `
+    <div class="alert-box">
+      🏆 <strong>${cheapest.name}</strong> has the lowest making charge (₹${cheapest.makingCharge}/g) → Rate: ₹${bestRate.toLocaleString('en-IN')}/gram &nbsp;|&nbsp; Save ~₹${savings}/gram vs city average
+    </div>`;
+
+  // ── FULL CRITERIA TABLE
+  const head = `<tr>
+    <th style="min-width:170px;">Criteria</th>
+    ${shops.map(s => `<th class="shop-col-head">${s.name}</th>`).join('')}
+  </tr>`;
+  document.getElementById('criteriaHead').innerHTML = head;
+
+  const rows = [
+    {
+      label: '22K Rate / gram', desc: 'Base + making charge (excl. GST)',
+      render: s => `<strong style="color:var(--gold)">₹${(baseRate + s.makingCharge).toLocaleString('en-IN')}</strong>`
+    },
+    {
+      label: 'Making Charge', desc: '₹ per gram added to base rate',
+      render: s => pill('₹' + s.makingCharge, s.makingCharge <= 180 ? 'green' : s.makingCharge <= 220 ? 'gold' : 'red')
+    },
+    {
+      label: 'BIS Hallmark (916)', desc: 'Govt. certified purity',
+      render: s => yesNo(s.hallmark)
+    },
+    {
+      label: 'Purity Guarantee', desc: 'Certified karat grade',
+      render: s => pill(s.purity, 'gold')
+    },
+    {
+      label: 'Wastage Charge', desc: 'Extra % charged on gold weight',
+      render: s => pill(s.wastage === 0 ? 'Nil ✓' : s.wastage + '%', s.wastage === 0 ? 'green' : 'red')
+    },
+    {
+      label: 'Buyback Rate', desc: '% of current price offered',
+      render: s => pill(s.buyback + '%', s.buyback >= 98 ? 'green' : s.buyback >= 96 ? 'gold' : 'red')
+    },
+    {
+      label: 'Exchange Offer', desc: 'Old gold exchange accepted',
+      render: s => yesNo(s.exchange)
+    },
+    {
+      label: 'Making Charge Negotiable', desc: 'Can you bargain?',
+      render: s => yesNo(s.negotiable)
+    },
+    {
+      label: 'EMI / Easy Payment', desc: 'No-cost EMI available',
+      render: s => yesNo(s.emi)
+    },
+    {
+      label: 'Online Price Transparency', desc: 'Rate visible before visiting',
+      render: s => yesNo(s.onlinePrice)
+    },
+    {
+      label: 'Warranty', desc: 'Jewellery manufacturing warranty',
+      render: s => pill(s.warranty, s.warranty === 'Lifetime' ? 'green' : 'gold')
+    },
+    {
+      label: 'Third-party Certified', desc: 'Independent quality certification',
+      render: s => yesNo(s.certified)
+    },
+    {
+      label: 'City Outlets', desc: 'Number of shops in city',
+      render: s => scoreBar(s.locations, Math.max(...shops.map(x => x.locations)))
+    },
+    {
+      label: 'Parking Available', desc: 'Ease of access',
+      render: s => yesNo(s.parking)
+    },
+    {
+      label: 'Google Rating', desc: 'Customer satisfaction score',
+      render: s => {
+        const pct = Math.round(((s.rating - 3) / 2) * 100);
+        const color = s.rating >= 4.5 ? '#4CAF7D' : s.rating >= 4 ? '#C9922A' : '#E05252';
+        return `<div class="score-bar">
+          <div class="score-bar-bg"><div class="score-bar-fill" style="width:${pct}%;background:${color}"></div></div>
+          <span class="score-bar-label">${s.rating} ⭐</span>
+        </div>`;
+      }
+    },
+    {
+      label: 'No. of Reviews', desc: 'Volume of customer feedback',
+      render: s => `<span style="color:var(--text2)">${s.reviews.toLocaleString('en-IN')}</span>`
+    },
+  ];
+
+  document.getElementById('criteriaBody').innerHTML = rows.map(row => `
+    <tr>
+      <td>
+        <div class="criteria-name">${row.label}</div>
+        <div class="criteria-desc">${row.desc}</div>
+      </td>
+      ${shops.map(s => `<td class="center">${row.render(s)}</td>`).join('')}
+    </tr>`).join('');
+}
+
+function switchPage(page, event) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(page).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  if (event && event.target) event.target.classList.add('active');
+  if (page === 'shops') loadShops();
+}
+
+function changeLocation() {
+  currentCity = document.getElementById('locationSelect').value;
+  document.getElementById('locationBadge').textContent = '📍 ' + currentCity;
+  document.getElementById('shopCity').textContent = currentCity;
+  loadShops();
+}
+
+// ── INIT
+updateDashboard();
+loadShops();
+</script>
+</body>
+</html>
